@@ -2,6 +2,8 @@
 #include <ctime>
 #include <iostream>
 
+#include "timems.h"
+
 int main(int argc, char** argv)
 {
 	int r;
@@ -9,14 +11,10 @@ int main(int argc, char** argv)
 	{
 		r = atol(argv[1]);
 	} else {
-		// Fast Seed
-		struct timespec ts;
-		clock_gettime(CLOCK_MONOTONIC, &ts);
-
 		// use nano-seconds instead of seconds
-		srand((time_t)ts.tv_nsec);
-		
+		srand(timems());
 		//srand(time(NULL)); // This seeds it too slow, output is the same if ran again within 1 second
+
 		r = (rand()%7)+0;
 	}
 	switch(r)
